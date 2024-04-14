@@ -19,7 +19,7 @@
         <h3 class="text-center">Детали заказа</h3>
         <div class="card mb-3">
             <div class="card-body">
-                <form action="{% url "orders:create_order" %}" method="post">
+                <form action="{% url 'orders:create_order' %}" method="post">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -50,20 +50,20 @@
                                 <div class="alert alert-danger alert-dismissible fade show">{{form.phone_number.errors}}</div>
                             {% endif %}
                         </div>
-                        <div class="col-md-12 mb-3">
-                            <label for="delivery" class="form-label">Способ доставки: </label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="requires_delivery"
-                                    id="id_requires_delivery" value="1" checked>
-                                <label class="form-check-label" for="id_requires_delivery">Нужна
-                                    доставка</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="requires_delivery"
-                                    id="id_requires_delivery" value="0">
-                                <label class="form-check-label" for="id_requires_delivery">Самовывоз</label>
-                            </div>
-                        </div>
+<!--                        <div class="col-md-12 mb-3">-->
+<!--                            <label for="delivery" class="form-label">Способ доставки: </label>-->
+<!--&lt;!&ndash;                            <div class="form-check form-check-inline">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <input class="form-check-input" type="radio" name="requires_delivery"&ndash;&gt;-->
+<!--&lt;!&ndash;                                    id="id_requires_delivery" value="1" checked>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <label class="form-check-label" for="id_requires_delivery">Нужна&ndash;&gt;-->
+<!--&lt;!&ndash;                                    доставка</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="form-check form-check-inline">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <input class="form-check-input" type="radio" name="requires_delivery"&ndash;&gt;-->
+<!--&lt;!&ndash;                                    id="id_requires_delivery" value="0">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <label class="form-check-label" for="id_requires_delivery">Самовывоз</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                        </div>-->
                         <div class="mb-3" id="deliveryAddressField">
                             <label for="id_delivery_address" class="form-label">Адрес
                                 доставки*:</label>
@@ -74,24 +74,24 @@
                                 <div class="alert alert-danger alert-dismissible fade show">{{form.delivery_address.errors}}</div>
                             {% endif %}
                         </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Способ оплаты: </label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="payment_on_get"
-                                    id="id_payment_on_get" value="0" checked>
-                                <label class="form-check-label" for="id_payment_on_get">Оплата
-                                    картой</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="payment_on_get"
-                                    id="id_payment_on_get" value="1">
-                                <label class="form-check-label" for="id_payment_on_get">Наличными/картой
-                                    при плучении</label>
-                                {% if form.payment_on_get.errors %}
-                                    <div class="alert alert-danger alert-dismissible fade show">{{form.payment_on_get.errors}}</div>
-                                {% endif %}
-                            </div>
-                        </div>
+<!--                        <div class="col-md-12 mb-3">-->
+<!--                            <label class="form-label">Способ оплаты: </label>-->
+<!--                            <div class="form-check form-check-inline">-->
+<!--                                <input class="form-check-input" type="radio" name="payment_on_get"-->
+<!--                                    id="id_payment_on_get" value="0" checked>-->
+<!--                                <label class="form-check-label" for="id_payment_on_get">Оплата-->
+<!--                                    картой</label>-->
+<!--                            </div>-->
+<!--                            <div class="form-check form-check-inline">-->
+<!--                                <input class="form-check-input" type="radio" name="payment_on_get"-->
+<!--                                    id="id_payment_on_get" value="1">-->
+<!--                                <label class="form-check-label" for="id_payment_on_get">Наличными/картой-->
+<!--                                    при плучении</label>-->
+<!--                                {% if form.payment_on_get.errors %}-->
+<!--                                    <div class="alert alert-danger alert-dismissible fade show">{{form.payment_on_get.errors}}</div>-->
+<!--                                {% endif %}-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                     <button type="submit" class="btn btn-dark">Оформить заказ</button>
                 </form>

@@ -31,7 +31,8 @@ def catalog(request, category_slug=None):
     context = {
         "title": "Home - Каталог",
         "goods": current_page,
-        "slug_url": category_slug
+        "slug_url": category_slug,
+        "order_by": order_by,
     }
     return render(request, "goods/catalog.html", context)
 

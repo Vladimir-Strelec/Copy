@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from goods.models import Products
 
@@ -18,11 +20,12 @@ class Order(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.SET_DEFAULT, blank=True, null=True, verbose_name="Пользователь", default=None)
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания заказа")
     phone_number = models.CharField(max_length=20, verbose_name="Номер телефона")
-    requires_delivery = models.BooleanField(default=False, verbose_name="Требуется доставка")
+    # requires_delivery = models.BooleanField(default=False, verbose_name="Требуется доставка")
     delivery_address = models.TextField(null=True, blank=True, verbose_name="Адрес доставки")
-    payment_on_get = models.BooleanField(default=False, verbose_name="Оплата при получении")
+    # payment_on_get = models.BooleanField(default=False, verbose_name="Оплата при получении")
     is_paid = models.BooleanField(default=False, verbose_name="Оплачено")
     status = models.CharField(max_length=50, default='В обработке', verbose_name="Статус заказа")
+    id_for_order = models.CharField(max_length=6, verbose_name="id dlya perevoda", default=None)
 
     class Meta:
         db_table = "order"
@@ -40,6 +43,7 @@ class OrderItem(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2, verbose_name="Цена")
     quantity = models.PositiveIntegerField(default=0, verbose_name="Количество")
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата продажи")
+    id_for_order = models.CharField(max_length=6, verbose_name="id dlya perevoda")
 
 
     class Meta:

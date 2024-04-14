@@ -9,12 +9,20 @@ from carts.models import Cart
 from orders.forms import CreateOrderForm
 from orders.models import Order, OrderItem
 
+import string
+import random
+
+
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+
 
 @login_required
 def create_order(request):
     if request.method == 'POST':
         form = CreateOrderForm(data=request.POST)
-        if form.is_valid():
+        if form:
+            form.is_valid()
             try:
                 with transaction.atomic():
                     user = request.user
@@ -25,9 +33,10 @@ def create_order(request):
                         order = Order.objects.create(
                             user=user,
                             phone_number=form.cleaned_data['phone_number'],
-                            requires_delivery=form.cleaned_data['requires_delivery'],
+                            # requires_delivery=form.cleaned_data['requires_delivery'],
                             delivery_address=form.cleaned_data['delivery_address'],
-                            payment_on_get=form.cleaned_data['payment_on_get'],
+                            # payment_on_get=form.cleaned_data['payment_on_get'],
+                            id_for_order=id_generator()
                         )
                         # Создать заказанные товары
                         for cart_item in cart_items:
