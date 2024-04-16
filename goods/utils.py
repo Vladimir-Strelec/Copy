@@ -7,11 +7,14 @@ from django.contrib.postgres.search import (
 )
 
 from goods.models import Products
+from orders.models import Order
 
 
 def q_search(query):
     if query.isdigit() and len(query) <= 5:
         return Products.objects.filter(id=int(query))
+    if query.isalnum() and len(query) == 6:
+        return Order.objects.filter(id=1)
 
     vector = SearchVector("name", "description")
     query = SearchQuery(query)

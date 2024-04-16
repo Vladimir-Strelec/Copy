@@ -11,10 +11,13 @@ def catalog(request, category_slug=None):
     on_sale = request.GET.get('on_sale', None)
     order_by = request.GET.get('order_by', None)
     query = request.GET.get('q', None)
+    order = request.GET.get('q', None)
     
     if category_slug == "all":
         goods = Products.objects.all()
-    elif query:
+    elif query.isdigit():
+        goods = q_search(query)
+    elif query.isalnum():
         goods = q_search(query)
     else:
         goods = get_list_or_404(Products.objects.filter(category__slug=category_slug))
@@ -26,11 +29,13 @@ def catalog(request, category_slug=None):
         goods = goods.order_by(order_by)
 
     paginator = Paginator(goods, 3)
+
     current_page = paginator.page(int(page))
 
     context = {
         "title": "Home - Каталог",
         "goods": current_page,
+        "orders": order,
         "slug_url": category_slug,
         "order_by": order_by,
     }
